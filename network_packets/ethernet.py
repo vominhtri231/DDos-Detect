@@ -1,9 +1,11 @@
 import struct
 import socket
-from capture_traffic.network_packets.utils import get_mac_address
+from network_packets.utils import get_mac_address
 
 
 class Ethernet:
+    IPV4_PROTOCOL = 8
+
     def __init__(self, raw_data):
         destination, source, protocol = struct.unpack(
             '! 6s 6s H', raw_data[:14])

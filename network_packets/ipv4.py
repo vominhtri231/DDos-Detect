@@ -1,8 +1,12 @@
 import struct
-from capture_traffic.network_packets.utils import get_ipv4_address
+from network_packets.utils import get_ipv4_address
 
 
 class Ipv4:
+    ICMP_PROTOCOL = 1
+    TCP_PROTOCOL = 6
+    UDP_PROTOCOL = 17
+
     def __init__(self, raw_data):
         version_header_length = raw_data[0]
         self.version = version_header_length >> 4

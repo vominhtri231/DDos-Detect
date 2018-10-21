@@ -19,3 +19,9 @@ class Tcp:
             self.source_port, self.destination_port, self.sequence, self.acknowledgment))
         print("self-Flag || urg:{},ack:{},psh={},rst={},syn={},fin={}".format(
             self.flag_urg, self.flag_ack, self.flag_psh, self.flag_rst, self.flag_syn, self.flag_fin))
+
+    def is_syn_only(self):
+        return self.flag_syn == 1 and self.flag_ack == 0
+
+    def is_ack_only(self):
+        return self.flag_ack == 1 and self.flag_syn == 0

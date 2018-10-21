@@ -3,7 +3,6 @@ from capture_traffic.network_packets.utils import get_ipv4_address
 
 
 class Ipv4:
-
     def __init__(self, raw_data):
         version_header_length = raw_data[0]
         self.version = version_header_length >> 4
@@ -13,3 +12,7 @@ class Ipv4:
         self.source = get_ipv4_address(source)
         self.target = get_ipv4_address(target)
         self.data = raw_data[self.header_length:]
+
+    def get_info(self):
+        print("Ip || source : {} ,target : {},protocol :{}".format(
+            self.source, self.target, self.protocol))

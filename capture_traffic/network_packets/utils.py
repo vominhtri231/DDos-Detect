@@ -5,4 +5,4 @@ def get_mac_address(mac_raw):
 
 
 def get_ipv4_address(ipv4_raw):
-        return '.'.join(map(str, ipv4_raw))
+    return '.'.join(map(str, ipv4_raw))

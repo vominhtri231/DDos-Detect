@@ -13,42 +13,39 @@ def main():
     while True:
         raw_data, addr = conn.recvfrom(65536)
         ether = Ethernet(raw_data)
-        # print("\n")
-        # print("Address : {}".format(addr))
+        print("\n")
+        print("Address : {}".format(addr))
 
-        # print("Ethernet || source : {} ,destination : {},protocol :{}".format(
-        #     ether.source, ether.destination, ether.protocol))
+        ether.get_info()
 
         if ether.protocol == 8:
             ipv4 = Ipv4(ether.data)
-            # print("Ip || source : {} ,target : {},protocol :{}".format(
-            #     ipv4.source, ipv4.target, ipv4.protocol))
+            ipv4.get_info()
             if ipv4.protocol == 1:
                 icmp = Icmp(ipv4.data)
-                # print("ICMP || type:{}, code:{}, checksum:{}".format(
-                #     icmp.type, icmp.code, icmp.checksum))
+                icmp.get_info()
             elif ipv4.protocol == 6:
                 tcp = Tcp(ipv4.data)
-                # print("TCP || src_port:{},dst_port:{},seq={},ack={}".format(
-                #     tcp.source_port, tcp.destination_port, tcp.sequence, tcp.acknowledgment))
-                # print("TCP-Flag || urg:{},ack:{},psh={},rst={},syn={},fin={}".format(
-                #     tcp.flag_urg, tcp.flag_ack, tcp.flag_psh, tcp.flag_rst, tcp.flag_syn, tcp.flag_fin))
+                tcp.get_info()
                 if tcp.destination_port == 53 or tcp.source_port == 53:
                     sniff_dns(tcp.data)
+                elif tcp.source_port == 22 or tcp.destination_port == 22:
+                    sniff_ssh(tcp.data)
 
             elif ipv4.protocol == 17:
                 udp = Udp(ipv4.data)
-                # print("UDP || src_port:{} ,dst_port:{}".format(
-                #     udp.source_port, udp.destination_port))
+                udp.get_info()
                 if udp.destination_port == 53 or udp.source_port == 53:
                     sniff_dns(udp.data)
 
 
 def sniff_dns(raw_data):
-    if len(raw_data) > 12 :
+    if len(raw_data) > 12:
         dns = Dns(raw_data)
-        print("DNS : question:={}, answer:{} , auth:{} ,addition:{}".format(
-            dns.question_count, dns.result_count, dns.author_record_count, dns.add_record_count))
+        dns.get_info()
+
+def sniff_ssh(raw_data):
+    print("not yet")
 
 
 if __name__ == "__main__":

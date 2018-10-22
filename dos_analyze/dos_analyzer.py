@@ -4,7 +4,9 @@ from network_packets.icmp import Icmp
 from network_packets.tcp import Tcp
 from network_packets.udp import Udp
 from network_packets.dns import Dns
+from network_packets.tls import Tls
 from dos_analyze.analyze_result import Analyze_result
+
 
 def get_dos_info(raw_data):
     result = Analyze_result()
@@ -19,11 +21,16 @@ def get_dos_info(raw_data):
                 result.set_syn()
             if tcp.is_ack_only():
                 result.set_ack()
+            if tcp.is_using_tls():
+                tls = Tls(tcp.data)
+                if tls.is_key_exchange():
+                    result.set_key_exchange()
             result.merge(get_dos_dns_info(tcp))
         elif ipv4.protocol == Ipv4.UDP_PROTOCOL:
             udp = Udp(ipv4.data)
             result.merge(get_dos_dns_info(udp))
     return result
+
 
 def get_dos_dns_info(protocol):
     result = Analyze_result()

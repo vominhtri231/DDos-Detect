@@ -2,6 +2,9 @@ import struct
 
 
 class Tcp:
+    USING_TLS_PORTS = [261, 442, 448, 465, 563,
+                       614, 636, 989, 990, 992, 993, 994, 995]
+
     def __init__(self, raw_data):
         (self.source_port, self.destination_port, self.sequence, self.acknowledgment, offset_reserved_flags) = struct.unpack(
             '! H H L L H', raw_data[:14])
@@ -25,3 +28,6 @@ class Tcp:
 
     def is_ack_only(self):
         return self.flag_ack == 1 and self.flag_syn == 0
+
+    def is_using_tls(self):
+        return self.source_port in Tcp.USING_TLS_PORTS or self.destination_port in Tcp.USING_TLS_PORTS

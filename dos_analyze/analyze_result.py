@@ -20,6 +20,9 @@ class Analyze_result():
     def set_dns_out(self):
         self.map[Dos_para.IS_DNS_OUT] = 1
 
+    def set_key_exchange(self):
+        self.map[Dos_para.IS_KEY_EXCHANGE] = 1
+
     def merge(self, other):
         for key in other.map:
             frequency = other.map[key]

@@ -5,13 +5,6 @@ from numpy import shape
 data,label = load_data("/Users/mba0066/code-workspace/python-workspace/DDos detect/data/train")
 data2,label2 = load_data("/Users/mba0066/code-workspace/python-workspace/DDos detect/data/test")
 
-print(label[0])
-for i in range(32):
-    s = ""
-    for j in range(32):
-        s += "{0:1d}".format(int(data[0][i*32+j]))
-    print(s)
-
 data = add_bias(data)
 weigh = gradDecent(data,label,0.3,30000)
 

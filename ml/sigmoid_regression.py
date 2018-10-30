@@ -1,5 +1,4 @@
-from numpy import exp, ones, shape, log, c_, zeros
-import numpy as np
+from numpy import exp, ones, shape, log, c_, zeros, dot
 
 
 def sigmoid(x):
@@ -7,12 +6,12 @@ def sigmoid(x):
 
 
 def predict(data, weigh):
-    return sigmoid(np.dot(data, weigh))
+    return sigmoid(dot(data, weigh))
 
 
 def add_bias(data):
     m = len(data)
-    return np.c_[ones((m, 1)), data]
+    return c_[ones((m, 1)), data]
 
 
 def gradDecent(data, label, alpha, max):
@@ -23,7 +22,7 @@ def gradDecent(data, label, alpha, max):
         hipo = predict(data, weigh)
         print(lostFunction(hipo, label))
         error = hipo - label
-        weigh = weigh - alpha*np.dot(data.transpose(), error)/m
+        weigh = weigh - alpha*dot(data.transpose(), error)/m
     return weigh
 
 

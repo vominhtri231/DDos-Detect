@@ -8,15 +8,20 @@ from network_packets.tls import Tls
 from dos_analyze.analyze_result import Analyze_result
 
 
-def get_dos_info(raw_data):
-    result = Analyze_result()
+def get_dos_info(raw_data, origin_ip):
+
     ether = Ethernet(raw_data)
     if ether.protocol == Ethernet.IPV4_PROTOCOL:
         ipv4 = Ipv4(ether.data)
+        other_ip = ipv4.get_other_ip(origin_ip)
+        result = Analyze_result()
+
         if ipv4.protocol == Ipv4.ICMP_PROTOCOL:
             result.set_icmp()
         elif ipv4.protocol == Ipv4.TCP_PROTOCOL:
             tcp = Tcp(ipv4.data)
+            if tcp.is_using_ssh:
+                result.set_ssh()
             if tcp.is_syn_only():
                 result.set_syn()
             if tcp.is_ack_only():
@@ -25,11 +30,14 @@ def get_dos_info(raw_data):
                 tls = Tls(tcp.data)
                 if tls.is_key_exchange():
                     result.set_key_exchange()
+            result.set_tcp_length(tcp.length/1024)
             result.merge(get_dos_dns_info(tcp))
         elif ipv4.protocol == Ipv4.UDP_PROTOCOL:
             udp = Udp(ipv4.data)
+            result.set_udp_length(udp.length/1024)
             result.merge(get_dos_dns_info(udp))
-    return result
+
+        return other_ip, result
 
 
 def get_dos_dns_info(protocol):

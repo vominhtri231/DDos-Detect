@@ -20,3 +20,9 @@ class Ipv4:
     def get_info(self):
         print("Ip || source : {} ,target : {},protocol :{}".format(
             self.source, self.target, self.protocol))
+
+    def get_other_ip(self, origin_ip):
+        if self.target == origin_ip:
+            return self.source
+        else:
+            return self.target

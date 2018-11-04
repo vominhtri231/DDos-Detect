@@ -3,9 +3,9 @@ from os_heplder import load_data
 from numpy import shape
 
 data, label = load_data(
-    "/Users/mba0066/code-workspace/python-workspace/DDos detect/data/train")
+    "/Users/mba0066/code-workspace/python-workspace/DDos detect/ml/data/train")
 data2, label2 = load_data(
-    "/Users/mba0066/code-workspace/python-workspace/DDos detect/data/test")
+    "/Users/mba0066/code-workspace/python-workspace/DDos detect/ml/data/test")
 
 data = add_bias(data)
 weigh = gradDecent(data, label, 1, 10000)

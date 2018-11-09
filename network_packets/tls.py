@@ -7,12 +7,10 @@ class Tls():
     CLIENT_KEY_EXCHANGE = 16
 
     def __init__(self, raw_data):
-        self.type, self.version, self.length = struct.unpack(
-            '! B H H', raw_data[:5])
-        print(self.type)
-        if self.is_hand_shake():
-            self.handshake_type = struct.unpack('! B', raw_data[5])
-            print(self.handshake_type)
+        if raw_data:
+            self.type = raw_data[0]
+            if self.is_hand_shake():
+                self.handshake_type = raw_data[5]
 
     def is_hand_shake(self):
         return self.type == Tls.HAND_SHAKE_TYPE

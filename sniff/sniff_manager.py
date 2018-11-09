@@ -1,13 +1,13 @@
 import socket
 import time
 from sniff.sniff_worker import Sniff_worker
+from sniff.file_helper import save_result_in_folder
 
 
 class Sniff_Manager():
     def __init__(self, time_period, network_name):
         self.time_period = time_period
         self.network_name = network_name
-        self.results = []
 
     def start_sniff(self):
         conn = socket.socket(
@@ -20,5 +20,7 @@ class Sniff_Manager():
             self.handle_result(worker.result)
 
     def handle_result(self, result):
-        self.results.append(result)
-        print(result.map)
+        for key in result:
+            print(key)
+            print(result[key].convertToList())
+            save_result_in_folder(key, result[key])

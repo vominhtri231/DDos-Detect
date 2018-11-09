@@ -2,12 +2,13 @@ import struct
 
 
 class Tcp:
-    USING_TLS_PORTS = [261, 442, 448, 465, 563,
+    USING_TLS_PORTS = [261, 443, 448, 465, 563,
                        614, 636, 989, 990, 992, 993, 994, 995]
+    USING_SSH_PORT = 22
 
     def __init__(self, raw_data):
-        (self.source_port, self.destination_port, self.sequence, self.acknowledgment, offset_reserved_flags) = struct.unpack(
-            '! H H L L H', raw_data[:14])
+        (self.source_port, self.destination_port, self.sequence, self.acknowledgment, offset_reserved_flags,self.length) = struct.unpack(
+            '! H H L L H H', raw_data[:16])
         offset = (offset_reserved_flags >> 12) * 4
         self.flag_urg = (offset_reserved_flags & 32) >> 5
         self.flag_ack = (offset_reserved_flags & 16) >> 4
@@ -24,10 +25,14 @@ class Tcp:
             self.flag_urg, self.flag_ack, self.flag_psh, self.flag_rst, self.flag_syn, self.flag_fin))
 
     def is_syn_only(self):
-        return self.flag_syn == 1 and self.flag_ack == 0
+        return self.flag_syn == 1
 
     def is_ack_only(self):
-        return self.flag_ack == 1 and self.flag_syn == 0
+        return self.flag_ack == 1
 
     def is_using_tls(self):
-        return self.source_port in Tcp.USING_TLS_PORTS or self.destination_port in Tcp.USING_TLS_PORTS
+        return int(self.source_port) in Tcp.USING_TLS_PORTS or int(self.destination_port) in Tcp.USING_TLS_PORTS
+
+    def is_using_ssh(self):
+        return int(self.source_port) == Tcp.USING_SSH_PORT or int(self.destination_port) == Tcp.USING_SSH_PORT
+ 

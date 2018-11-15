@@ -1,7 +1,7 @@
 import socket
 import time
 from sniff.sniff_worker import Sniff_worker
-from sniff.file_helper import save_result_in_folder
+from sniff.utils.save_sniff_result import save_result_in_folder
 
 
 class Sniff_Manager():

@@ -1,5 +1,5 @@
 import struct
-from network_packets.utils import get_ipv4_address
+from sniff.network_packets.utils import get_ipv4_address
 
 
 class Ipv4:

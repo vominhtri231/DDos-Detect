@@ -1,4 +1,4 @@
-from dos_analyze.analyze_result import Analyze_result
+from sniff.dos_analyze.analyze_result import Analyze_result
 
 
 def save_to_file(filepath, ip, result: Analyze_result):
@@ -17,5 +17,5 @@ def save_result_in_folder(ip, result: Analyze_result):
     save_result_in_folder.index += 1
 
 
-save_result_in_folder.folder_path = "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/ssh"
+save_result_in_folder.folder_path = "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normal_big_traffic"
 save_result_in_folder.index = 0

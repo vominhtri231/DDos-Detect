@@ -1,7 +1,7 @@
 import threading
-from dos_analyze.dos_analyzer import get_dos_info
-from dos_analyze.analyze_result import Analyze_result
-from sniff.get_ip import get_interface_ip
+from sniff.dos_analyze.dos_analyzer import get_dos_info
+from sniff.dos_analyze.analyze_result import Analyze_result
+from sniff.utils.get_ip import get_interface_ip
 
 
 class Sniff_worker(threading.Thread):

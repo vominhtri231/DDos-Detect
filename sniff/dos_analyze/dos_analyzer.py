@@ -1,21 +1,19 @@
-from network_packets.ethernet import Ethernet
-from network_packets.ipv4 import Ipv4
-from network_packets.icmp import Icmp
-from network_packets.tcp import Tcp
-from network_packets.udp import Udp
-from network_packets.dns import Dns
-from network_packets.tls import Tls
-from dos_analyze.analyze_result import Analyze_result
+from sniff.network_packets.ethernet import Ethernet
+from sniff.network_packets.ipv4 import Ipv4
+from sniff.network_packets.icmp import Icmp
+from sniff.network_packets.tcp import Tcp
+from sniff.network_packets.udp import Udp
+from sniff.network_packets.dns import Dns
+from sniff.network_packets.tls import Tls
+from sniff.dos_analyze.analyze_result import Analyze_result
 
 
 def get_dos_info(raw_data, origin_ip):
-
     ether = Ethernet(raw_data)
     if ether.protocol == Ethernet.IPV4_PROTOCOL:
         ipv4 = Ipv4(ether.data)
         other_ip = ipv4.get_other_ip(origin_ip)
         result = Analyze_result()
-
         if ipv4.protocol == Ipv4.ICMP_PROTOCOL:
             result.set_icmp()
         elif ipv4.protocol == Ipv4.TCP_PROTOCOL:

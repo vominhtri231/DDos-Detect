@@ -1,6 +1,6 @@
 import struct
 import socket
-from network_packets.utils import get_mac_address
+from sniff.network_packets.utils import get_mac_address
 
 
 class Ethernet:

@@ -1,4 +1,4 @@
-from dos_analyze.dos_attribute import Dos_attribute
+from sniff.dos_analyze.dos_attribute import Dos_attribute
 
 
 class Analyze_result():

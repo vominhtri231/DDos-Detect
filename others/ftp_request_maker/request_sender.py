@@ -3,12 +3,10 @@ import threading
 
 
 class Request_sender(threading.Thread):
-    def __init__(self, id, server_ip, username, password, path, file_name):
+    def __init__(self, id, server_ip, path, file_name):
         threading.Thread.__init__(self)
         self.id = id
         self.server_ip = server_ip
-        self.username = username
-        self.password = password
         self.path = path
         self.file_name = file_name
 
@@ -25,7 +23,7 @@ class Request_sender(threading.Thread):
 
     def send_request(self, result_file_path):
         ftp = FTP(self.server_ip)
-        ftp.login(self.username, self.password)
+        ftp.login(user="ftp")
         ftp.cwd(self.path)
         ftp.retrbinary("RETR "+self.file_name,
                        open(result_file_path, "wb").write)

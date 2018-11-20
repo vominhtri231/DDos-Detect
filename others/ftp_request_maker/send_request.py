@@ -1,14 +1,11 @@
-from utils.ftp_request_maker.request_sender import Request_sender
+from others.ftp_request_maker.request_sender import Request_sender
 
 
 def start_send_request():
-    ip = "192.168.1.3"
-    username = "tri"
-    password = "vominhtri"
+    ip = "192.168.1.21"
     path = ""
     file_name = "friend-ss1.zip"
-    Request_sender(1, ip, username, password, path, file_name).start()
-    Request_sender(2, ip, username, password, path, file_name).start()
+    Request_sender(1, ip, path, file_name).start()
 
 
 if __name__ == "__main__":

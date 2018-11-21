@@ -23,10 +23,10 @@ class Request_sender(threading.Thread):
             num += 1
 
     def send_request(self, result_file_path):
+        localFile = open(result_file_path, "wb")
         ftp = FTP(self.server_ip)
         ftp.login()
         ftp.cwd(self.path)
-        ftp.retrbinary("RETR "+self.file_name,
-                       open(result_file_path, "wb").write)
+        ftp.retrbinary("RETR "+self.file_name, localFile.write)
+        localFile.close()
         ftp.quit()
-        ftp.close()

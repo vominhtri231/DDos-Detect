@@ -1,4 +1,4 @@
-from others.ftp_request_maker.request_sender import Request_sender
+from others.make_ftp_request.request_sender import Request_sender
 
 
 def start_send_request():

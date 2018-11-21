@@ -18,13 +18,15 @@ class Request_sender(threading.Thread):
         while(True):
             result_file_name = file_name_without_ext + \
                 "_"+str(self.id)+"_"+str(num)+"."+file_ext
-            self.send_request("download_files/" + result_file_name)
+            result_path = "download_files/" + result_file_name
+            self.send_request(result_path)
             num += 1
 
     def send_request(self, result_file_path):
         ftp = FTP(self.server_ip)
-        ftp.login(user="ftp")
+        ftp.login()
         ftp.cwd(self.path)
         ftp.retrbinary("RETR "+self.file_name,
                        open(result_file_path, "wb").write)
         ftp.quit()
+        ftp.close()

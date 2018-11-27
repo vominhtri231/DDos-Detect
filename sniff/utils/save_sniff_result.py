@@ -17,5 +17,5 @@ def save_result_in_folder(ip, result: Analyze_result):
     save_result_in_folder.index += 1
 
 
-save_result_in_folder.folder_path = "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/test"
+save_result_in_folder.folder_path = "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normal"
 save_result_in_folder.index = 0

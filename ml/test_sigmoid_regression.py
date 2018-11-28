@@ -1,11 +1,11 @@
-from sigmoid_regression import gradDecent, predict, add_bias
-from os_heplder import load_data
+from ml.sigmoid_regression import gradDecent, predict, add_bias
+from ml.os_heplder import load_data
 from numpy import shape
 
 data, label = load_data(
-    "/Users/mba0066/code-workspace/python-workspace/DDos detect/ml/data/train")
+    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/ml/data/train")
 data2, label2 = load_data(
-    "/Users/mba0066/code-workspace/python-workspace/DDos detect/ml/data/test")
+    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/ml/data/test")
 
 data = add_bias(data)
 weigh = gradDecent(data, label, 1, 10000)

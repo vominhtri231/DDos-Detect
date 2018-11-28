@@ -1,11 +1,11 @@
 from ml.sigmoid_regression import gradDecent, predict, add_bias
-from ml.os_heplder import load_data
+from ml.io_utils import load_data_test
 from numpy import shape
 
-data, label = load_data(
-    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/ml/data/train")
-data2, label2 = load_data(
-    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/ml/data/test")
+data, label = load_data_test(
+    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/data_for_testing_model/train")
+data2, label2 = load_data_test(
+    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/data_for_testing_model/test")
 
 data = add_bias(data)
 weigh = gradDecent(data, label, 1, 10000)

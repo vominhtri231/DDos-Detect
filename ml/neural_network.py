@@ -31,6 +31,7 @@ class Neural_network:
         a2 = c_[ones((m, 1)), a2]
         z3 = dot(a2, self.weigh2)
         a3 = self.__sigmoid(z3)
+        
         print(self.__lost_value(a3, label))
 
         delta3 = a3 - label

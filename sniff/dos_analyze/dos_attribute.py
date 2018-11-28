@@ -10,5 +10,6 @@ class Dos_attribute():
     IS_SSH = "is_ssh"
     TCP_LENGTH = "tcp_length"
     UDP_LENGTH = "udp_length"
-    ATTRIBUTES = [IS_IPV4, IS_ICMP, IS_SYN, IS_ACK, IS_SSH, IS_DNS_IN,
-                  IS_DNS_OUT, IS_KEY_EXCHANGE, IS_TLS, UDP_LENGTH, TCP_LENGTH]
+    ATTRIBUTES = [IS_IPV4, IS_ICMP, IS_SYN, IS_ACK, IS_SSH,
+                  UDP_LENGTH, TCP_LENGTH]
+   #IS_DNS_IN,  IS_DNS_OUT, IS_KEY_EXCHANGE, IS_TLS is removed

@@ -1,10 +1,10 @@
 from ml.neural_network import Neural_network
-from ml.os_heplder import load_data
+from ml.io_utils import load_data_test
 
-data, label = load_data(
-    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/ml/data/train")
-data2, label2 = load_data(
-    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/ml/data/test")
+data, label = load_data_test(
+    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/data_for_testing_model/train")
+data2, label2 = load_data_test(
+    "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/data_for_testing_model/test")
 
 neural_network = Neural_network(len(data[0]), 10, 1)
 neural_network.train(data, label, 10000,1)

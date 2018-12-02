@@ -12,7 +12,6 @@ saved_state_dir = "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/
 # neural_network.save_state(saved_state_dir)
 
 
-
 # hipo = neural_network.predict(data2)
 # for i in range(len(hipo)):
 #     print("{} - {} ".format(hipo[i], label2[i]))

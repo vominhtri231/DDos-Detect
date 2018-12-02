@@ -1,4 +1,5 @@
 from ml.io_utils import save_list_to_file
+import ml.const
 
 
 def reduce_attrs(data_pair, saved_train_file_name, saved_test_file_name):
@@ -26,8 +27,8 @@ def create_attrs_result(line):
 
 
 def create_label_result(label):
-    full_lable = ['0']*5
-    full_lable[label-1] = '1'
+    full_lable = ['0']*len(ml.const.dos_labels)
+    full_lable[label] = '1'
     return ";".join(full_lable)
 
 
@@ -38,10 +39,10 @@ def divide_to_train_and_test(origin_result):
 
 
 reduce_attrs([
-    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/normal.txt", 5],
-    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/ssh.txt", 4],
-    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/icmp.txt", 3],
-    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/udp.txt", 2],
-    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/syn.txt", 1]
+    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/normal.txt", 4],
+    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/ssh.txt", 3],
+    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/icmp.txt", 2],
+    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/udp.txt", 1],
+    ["/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/syn.txt", 0]
 ], "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/train.txt",
     "/home/minhtri/Code-workspae/python-workspace/DDosDetect/data/normalized_data/test.txt")
